@@ -1,1 +1,2 @@
-find . -type f  | git check-ignore --stdin
+#!/bin/bash
+git ls-files  --exclude-standard --others --ignored
