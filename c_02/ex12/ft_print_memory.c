@@ -10,59 +10,99 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// TODO pass to print address the array and inside the function convert to long
-// TODO restable the line of the string in main
 #include <unistd.h>
+#include <stdio.h>
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void	print_address(unsigned int long value, int i)
+void	ft_printhex(unsigned char *str, unsigned int temp)
 {
-	if (i > 0)
+	unsigned int		i;
+	char				*hex;
+
+	i = 0;
+	hex = "0123456789abcdef";
+	while (i < 16 && str[i + temp])
 	{
-		print_address(value / 16, i - 1);
-		if (value % 16 >= 10)
-			ft_putchar('a' + value % 16 % 10);
+		ft_putchar(hex[str[i + temp] / 16]);
+		ft_putchar(hex[str[i + temp] % 16]);
+		if (i % 2 == 1)
+			write(1, " ", 1);
+		i++;
+	}
+	while (i <= 16)
+	{
+		if (i % 2 == 0)
+			write(1, "  ", 2);
 		else
-			ft_putchar('0' + value % 16);
+			write(1, "   ", 3);
+		i++;
 	}
 }
 
-void	ft_print_memory(void *addr, unsigned int size)
+void	ft_printhexa(unsigned long int nb)
 {
-	unsigned int long	addr_i;
+	char	*hex;
+
+	hex = "0123456789abcdef";
+	ft_putchar(hex[nb / 16]);
+	ft_putchar(hex[nb % 16]);
+}
+
+void	ft_putstr(unsigned char *str, unsigned int temp)
+{
 	unsigned int		i;
 
 	i = 0;
-	addr_i = (unsigned int long)&addr;
-	while (size-- > 80)
-	{	
-		print_address(addr_i, 16);
-		ft_putchar(':');
-		ft_putchar(' ');
-		while (i < 8)
+	while (i < 16 && str[i + temp])
+	{
+		if (str[i + temp] < 32 || str[i + temp] > 126)
 		{
-			print_address(*(addr++), 2);
-			print_address(*(addr++), 2);
-			ft_putchar(' ');
+			write(1, ".", 1);
+			i++;
 		}
-		ft_putchar('\n');
-		addr_i += 16;
+		else
+		{
+			write(1, &str[i + temp], 1);
+			i++;
+		}
 	}
+	write (1, "\n", 1);
 }
-/*
-int	main(void)
-{
-	char	*str;
-	unsigned int size;
 
-	size = 86;
-	str = "Bonjour les amin\nches...c. est fo\n
-u.tout.ce qu on\npeut faire avec.\n..print_memory..\n..lol.lol. .";
-	ft_print_memory(str, size);
-	return (0);
+void	*ft_print_memory(void *addr, unsigned int size)
+{
+	unsigned int	i;
+	int				j;
+
+	if (size == 0)
+		return (0);
+	i = 0;
+	while (i < size)
+	{
+		j = 8;
+    printf("printf address => %p\n", (addr + i));
+		while (--j >= 0)
+    {
+      ft_printhexa((unsigned long int)(addr + i) >> j * 8 & 0xff);
+    }
+		write(1, ": ", 2);
+		if (i % 16 == 0)
+			ft_printhex((unsigned char *)addr, i);
+		if (i % 16 == 0)
+			ft_putstr((unsigned char *)addr, i);
+		i += 16;
+	}
+	return (addr);
 }
-*/
+
+int		main(void)
+{
+	char	*string;
+
+	string = "Bonjour les aminches\t\n\tc  est fou.tout.ce qu on peut faire avec...print_memory....lol.lol. ";
+	ft_print_memory(string, sizeof(string));
+}
