@@ -7,8 +7,8 @@ void	ft_putchar(char c)
 
 void	print(int *tab, int n)
 {
-	int i;
-	int low;
+	int	i;
+	int	low;
 
 	i = 1;
 	low = 1;
@@ -33,8 +33,8 @@ void	print(int *tab, int n)
 
 void	ft_print_combn(int n)
 {
-	int		i;
-	int		tab[n];
+	int	i;
+	int	tab[n];
 
 	i = 0;
 	while (i < n)
@@ -52,11 +52,11 @@ void	ft_print_combn(int n)
 				tab[i] = 0;
 			}
 			i--;
-		} 
+		}
 	}
 }
 /*
-int	main()
+int	main(void)
 {
 	ft_print_combn(3);
-}*/
+} */

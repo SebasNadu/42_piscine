@@ -84,11 +84,11 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	while (i < size)
 	{
 		j = 8;
-    printf("printf address => %p\n", (addr + i));
+		printf("printf address => %p\n", (addr + i));
 		while (--j >= 0)
-    {
-      ft_printhexa((unsigned long int)(addr + i) >> j * 8 & 0xff);
-    }
+		{
+			ft_printhexa((unsigned long int)(addr + i) >> j * 8 & 0xff);
+		}
 		write(1, ": ", 2);
 		if (i % 16 == 0)
 			ft_printhex((unsigned char *)addr, i);
@@ -98,11 +98,10 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	}
 	return (addr);
 }
-
-int		main(void)
+/*int	main(void)
 {
 	char	*string;
 
 	string = "Bonjour les aminches\t\n\tc  est fou.tout.ce qu on peut faire avec...print_memory....lol.lol. ";
 	ft_print_memory(string, sizeof(string));
-}
+} */
