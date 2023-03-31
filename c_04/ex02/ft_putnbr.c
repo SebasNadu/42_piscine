@@ -19,10 +19,10 @@ void	ft_putchar(char c)
 
 void	ft_putnbr(int nb)
 {
-	if (nb <= 9 && nb >= 0)
-		ft_putchar(nb + '0');
-	else if (nb == -2147483648)
+	if (nb == -2147483648)
 		write(1, "-2147483648", 11);
+	else if (nb <= 9 && nb >= 0)
+		ft_putchar(nb + '0');
 	else if (nb > 9)
 	{
 		ft_putnbr(nb / 10);
@@ -31,7 +31,7 @@ void	ft_putnbr(int nb)
 	else
 	{
 		write(1, "-", 1);
-		ft_putnbr(nb * -1);
+		ft_putnbr(-nb);
 	}
 }
 /*
@@ -39,7 +39,7 @@ int	main(void)
 {
 	int	nb;
 
-	nb = -2147483648;
+	nb = -2;
 	ft_putnbr(nb);
 	return (0);
-}*/
+} */

@@ -98,10 +98,10 @@ int	ft_atoi_base(char *str, char *base)
 	result *= n_p;
 	return (result);
 }
-
+/*
 #include <stdio.h>
 int	main(void)
 {
 	printf("%i", ft_atoi_base("a8", "0123456789abcdef"));
 	return (0);
-}
+} */
