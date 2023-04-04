@@ -16,24 +16,22 @@ void	print_solution(int board[][10])
 {
 	int		i;
 	int		j;
-	char	tmp;
+	int		k;
+	char	tmp[10];
 
-	i = 0;
-	while (i < 10)
+	i = -1;
+	k = -1;
+	while (++i < 10)
 	{
-		j = 0;
-		while (j < 10)
+		j = -1;
+		while (++j < 10)
 		{
 			if (board[i][j] == 1)
-			{
-				tmp = j + '0';
-				write(1, &tmp, 1);
-			}
-			j++;
+				buffer[++k] = j + '0';
 		}
-		i++;
 	}
-	write(1, "\n", 1);
+	buffer[k] = '\n';
+	write(1, buffer, k + 1);
 }
 
 int	is_good(int board[][10], int row, int col)
@@ -116,4 +114,4 @@ int main(void)
 {
 	printf("%i", ft_ten_queens_puzzle());
 	return (0);
-}*/
+} */
