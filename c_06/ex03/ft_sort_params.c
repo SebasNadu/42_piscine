@@ -48,7 +48,7 @@ void	ft_sort_params(int ac, char **av)
 	{
 		i = 1;
 		is_ended = 1;
-		while (i < ac - 1)
+		while (i < --ac)
 		{
 			if (ft_strcmp(av[i], av[i + 1]) > 0)
 			{
@@ -60,7 +60,6 @@ void	ft_sort_params(int ac, char **av)
 			i++;
 		}
 	}
-	ft_print_arg(ac, av);
 }
 
 int	main(int argc, char **argv)
@@ -79,5 +78,6 @@ int	main(int argc, char **argv)
 	}
 	else if (argc > 2)
 		ft_sort_params(argc, argv);
+	ft_print_arg(argc, argv);
 	return (0);
 }
