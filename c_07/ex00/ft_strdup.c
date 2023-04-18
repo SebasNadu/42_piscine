@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 char	*ft_strdup(char *src)
 {
@@ -30,12 +32,15 @@ char	*ft_strdup(char *src)
 	return (str_cpy);
 }
 /*
-#include <stdio.h>
-int	main(void)
+int		main(void)
 {
 	char	*str;
+	char	*allocated;
 
-	str = ft_strdup("hello");
-	printf("%s", str);
-	return (0);
-}*/
+	str = "Hello World with malloc()";
+	printf("x  : base  : $%s$ @ %p\n", str, str);
+	allocated = strdup(str);
+	printf("c  : alloc : $%s$ @ %p\n", allocated, allocated);
+	allocated = ft_strdup(str);
+	printf("ft : alloc : $%s$ @ %p\n", allocated, allocated);
+} */
