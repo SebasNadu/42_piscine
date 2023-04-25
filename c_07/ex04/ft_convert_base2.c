@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:55:00 by johnavar          #+#    #+#             */
-/*   Updated: 2023/04/20 15:55:03 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:05:03 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ int	base_index(char c, char *base)
 	while (base[++i])
 		if (base[i] == c)
 			return (i);
-	return (-1);
+	return (0);
 }
