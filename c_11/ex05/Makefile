@@ -1,0 +1,82 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/01 20:49:33 by johnavar          #+#    #+#              #
+#    Updated: 2023/05/01 20:52:16 by johnavar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+C_YELLOW_B=\033[1;33m
+C_LIGHT_RED_B=\033[0;91m
+C_WHITE=\033[0;97m
+C_RESET=\033[0;39m
+
+SRCS		= ./srcs/ft_atoi.c \
+			  ./srcs/ft_calc.c \
+			  ./srcs/ft_putchar.c \
+			  ./srcs/ft_putnbr.c \
+			  ./srcs/ft_putstr.c \
+			  ./srcs/main.c
+OBJS	= ${SRCS:.c=.o}
+INCS	= includes
+NAME	= do-op
+CC		= gcc
+RM		= rm -f
+CFLAGS	= -Wall -Wextra -Werror
+
+.c.o :
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I${INCS}
+
+${NAME} : ${OBJS}
+	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+
+all : ${NAME}
+
+clean :
+	${RM} ${OBJS}
+
+fclean : clean
+	${RM} ${NAME}
+
+norm :
+	norminette */*.[ch]
+
+find_sources :
+	@find srcs -type f -name "*.c" | xargs -I{} echo ./{} | tr '\n' ' '
+	
+test : re
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with empty$(C_RESET)" ;
+	@./${NAME} | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: 1 + 1$(C_RESET)" ;
+	@./${NAME} 1 + 1 | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: 42amis - --+-20toto12$(C_RESET)" ;
+	@./${NAME} 42amis - --+-20toto12 | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: 1 p 1$(C_RESET)" ;
+	@./${NAME} 1 p 1 | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: 1 + toto3$(C_RESET)" ;
+	@./${NAME} 1 + toto3 | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: toto3 + 4$(C_RESET)" ;
+	@./${NAME} toto3 + 4 | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: foo plus bar$(C_RESET)" ;
+	@./${NAME} foo plus bar | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: 25 / 0$(C_RESET)" ;
+	@./${NAME} 25 / 0 | cat -e ;
+	@##
+	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)Testing with: 25 % 0$(C_RESET)" ;
+	@./${NAME} 25 % 0 | cat -e ;
+	@##
+
+re : fclean all
+
+.PHONY: all clean fclean re .c.o test
